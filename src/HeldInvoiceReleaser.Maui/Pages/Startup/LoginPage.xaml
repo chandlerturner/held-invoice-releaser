@@ -2,8 +2,35 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:handlers="clr-namespace:HeldInvoiceReleaser.Maui.Handlers"
              x:Class="HeldInvoiceReleaser.Maui.Pages.Startup.LoginPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+    <VerticalStackLayout 
+        Spacing="25" 
+        Padding="30,0" 
+        VerticalOptions="Center">
+
+
+        <StackLayout Orientation="Horizontal">
+            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="65" WidthRequest="65" CornerRadius="50">
+                <Image Source="server.png" HeightRequest="30" WidthRequest="30" />
+            </Frame>
+            <Frame HeightRequest="47" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry Text="{Binding Server}" Margin="30,0,0,0" VerticalOptions="Center" Placeholder="Server Address" Keyboard="Email" />
+            </Frame>
+        </StackLayout>
+
+
+        <StackLayout Orientation="Horizontal">
+            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="65" WidthRequest="65" CornerRadius="50">
+                <Image Source="building.png" HeightRequest="30" WidthRequest="30" />
+            </Frame>
+            <Frame HeightRequest="47" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry Text="{Binding Location}" Margin="30,0,0,0" VerticalOptions="Center" Placeholder="Location" IsPassword="True" />
+            </Frame>
+        </StackLayout>
+
+
+        <Button Text="Sign In" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" Command="{Binding LoginCommand}" />
+
+    </VerticalStackLayout>
 </ContentPage>
