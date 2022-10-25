@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:HeldInvoiceReleaser.Maui.Models.ViewModels"
+             xmlns:models="clr-namespace:HeldInvoiceReleaser.Models;assembly=HeldInvoiceReleaser"
+             x:Class="HeldInvoiceReleaser.Maui.Pages.MainPage">
+
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="Auto,*,Auto">
+
+        <Image Grid.Row="0"
+               Grid.ColumnSpan="2"
+               Source="logo.png"
+               SemanticProperties.Description="The Austin Hose Logo"
+               WidthRequest="259"
+               HeightRequest="59"
+               HorizontalOptions="Center" />
+
+        <CollectionView Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Orders}"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:HeldInvoice">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="150" Style="{StaticResource CardView}">
+                            <Grid Padding="10" ColumnDefinitions="*,100" RowDefinitions="*,*,*,*">
+                                <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <Label Style="{StaticResource LargeLabel}" Text="Ship to: " />
+                                    <Label Style="{StaticResource LargeBoldLabel}" Text="{Binding ShipToName}" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <Label Style="{StaticResource LargeLabel}" Text="Pick Ticket: " />
+                                    <Label Style="{StaticResource LargeBoldLabel}" Text="{Binding PickTicketNumber}" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <Label Style="{StaticResource LargeLabel}" Text="Purchase Order: " />
+                                    <Label Style="{StaticResource LargeBoldLabel}" Text="{Binding CustomerPurchaseOrder}" />
+                                </HorizontalStackLayout>
+                                <Button 
+                                    Style="{StaticResource ButtonPrimarySolid}" 
+                                    Text="Release" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}, Path=ReleaseWithConfirmationCommand}" 
+                                    CommandParameter="{Binding .}"
+                                    Grid.Row="3" Grid.Column="1"/>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Refresh Orders" 
+                Command="{Binding GetOrdersCommand}"
+                IsEnabled="{Binding NotGettingOrders}"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource ButtonPrimarySolid}"
+                Margin="8"/>
+
+
+        <ActivityIndicator IsVisible="{Binding GettingOrders}"
+                           IsRunning="{Binding GettingOrders}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="3"
+                           Grid.ColumnSpan="3"/>
+    </Grid>
+</ContentPage>
