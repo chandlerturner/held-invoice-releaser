@@ -4,7 +4,7 @@ namespace HeldInvoiceReleaser.Maui.Models.Commands
 {
     public class LoginCommand
     {
-        public string Server { get; set; }
+        public string ServerAddress { get; set; }
         public string Location { get; set; }
     }
 
@@ -12,9 +12,9 @@ namespace HeldInvoiceReleaser.Maui.Models.Commands
     {
         public LoginCommandValidator()
         {
-            RuleFor(x => x.Server)
+            RuleFor(x => x.ServerAddress)
                 .Must(ServerMustBeAUri)
-                .WithMessage("Server '{PropertyValue}' must be a valid URI. eg: http://www.SomeWebSite.com.au");
+                .WithMessage("Server Address must be a valid http URI. eg: http://www.SomeWebSite.com.au");
         }
 
         private static bool ServerMustBeAUri(string link)
@@ -24,9 +24,7 @@ namespace HeldInvoiceReleaser.Maui.Models.Commands
                 return false;
             }
 
-            //Courtesy of @Pure.Krome's comment and https://stackoverflow.com/a/25654227/563532
-            Uri outUri;
-            return Uri.TryCreate(link, UriKind.Absolute, out outUri)
+            return Uri.TryCreate(link, UriKind.Absolute, out var outUri)
                    && (outUri.Scheme == Uri.UriSchemeHttp || outUri.Scheme == Uri.UriSchemeHttps);
         }
     }

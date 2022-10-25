@@ -21,7 +21,7 @@ public class InvoiceApiService : IInvoiceApiService
         var client = _httpClientFactory.CreateClient();
         try
         {
-            var response = await client.GetAsync($"{loginCommand.Server}/auth");
+            var response = await client.GetAsync($"{loginCommand.ServerAddress}/auth");
             return response.IsSuccessStatusCode
                 ? Result.Success()
                 : Result.Failure(response.StatusCode.ToString());

@@ -9,19 +9,19 @@ namespace HeldInvoiceReleaser.Maui.Models.ViewModels;
 
 public partial class LoginPageViewModel : BaseViewModel
 {
-    private readonly IInvoiceApiService _invoiceApiService;
-    private readonly IValidator<LoginCommand> _loginCommandValidator;
-    [ObservableProperty] private string _server;
-
+    [ObservableProperty] private string _serverAddress;
     [ObservableProperty] private string _location;
     [ObservableProperty] private string _loginError;
+
+    private readonly IInvoiceApiService _invoiceApiService;
+    private readonly IValidator<LoginCommand> _loginCommandValidator;
 
     public LoginPageViewModel(IInvoiceApiService invoiceApiService, IValidator<LoginCommand> loginCommandValidator)
     {
         _invoiceApiService = invoiceApiService;
         _loginCommandValidator = loginCommandValidator;
 
-        Server = Preferences.Get(nameof(Server), string.Empty);
+        ServerAddress = Preferences.Get(nameof(ServerAddress), string.Empty);
         Location = Preferences.Get(nameof(Location), string.Empty);
     }
 
@@ -37,7 +37,7 @@ public partial class LoginPageViewModel : BaseViewModel
 
     private Result<LoginCommand> CreateCommand()
     {
-        LoginCommand loginCommand = new() { Server = Server, Location = Location };
+        LoginCommand loginCommand = new() { ServerAddress = ServerAddress, Location = Location };
         var validationResult = _loginCommandValidator.Validate(loginCommand);
         return validationResult.IsValid
             ? loginCommand
@@ -52,9 +52,9 @@ public partial class LoginPageViewModel : BaseViewModel
 
     private void SavePreferences()
     {
-        if (Preferences.ContainsKey(nameof(Server)))
+        if (Preferences.ContainsKey(nameof(ServerAddress)))
         {
-            Preferences.Remove(nameof(Server));
+            Preferences.Remove(nameof(ServerAddress));
         }
 
         if (Preferences.ContainsKey(nameof(Location)))
@@ -62,7 +62,7 @@ public partial class LoginPageViewModel : BaseViewModel
             Preferences.Remove(nameof(Location));
         }
 
-        Preferences.Set(nameof(Server), Server);
+        Preferences.Set(nameof(ServerAddress), ServerAddress);
         Preferences.Set(nameof(Location), Location);
     }
 }
