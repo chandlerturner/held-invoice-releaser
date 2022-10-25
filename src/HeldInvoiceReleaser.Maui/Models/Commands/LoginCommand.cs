@@ -13,6 +13,10 @@ namespace HeldInvoiceReleaser.Maui.Models.Commands
         public LoginCommandValidator()
         {
             RuleFor(x => x.ServerAddress)
+                .NotEmpty();
+
+            RuleFor(x => x.ServerAddress)
+                .NotEmpty()
                 .Must(ServerMustBeAUri)
                 .WithMessage("Server Address must be a valid http URI. eg: http://www.SomeWebSite.com.au");
         }
@@ -24,8 +28,9 @@ namespace HeldInvoiceReleaser.Maui.Models.Commands
                 return false;
             }
 
-            return Uri.TryCreate(link, UriKind.Absolute, out var outUri)
-                   && (outUri.Scheme == Uri.UriSchemeHttp || outUri.Scheme == Uri.UriSchemeHttps);
+            Uri outUri;
+            var isUri =  Uri.TryCreate(link, UriKind.Absolute, out outUri);
+            return isUri && (outUri.Scheme == Uri.UriSchemeHttp || outUri.Scheme == Uri.UriSchemeHttps);
         }
     }
 }

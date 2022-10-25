@@ -16,9 +16,9 @@ public partial class MainPageViewModel : BaseViewModel
     public bool NotGettingOrders => !GettingOrders;
     public ObservableCollection<HeldInvoice> Orders { get; } = new();
 
-    public MainPageViewModel(IConnectivity connectivity)
+    public MainPageViewModel(/*IConnectivity connectivity*/)
     {
-        _connectivity = connectivity;
+        //_connectivity = connectivity;
     }
 
 

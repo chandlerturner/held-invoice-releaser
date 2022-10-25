@@ -6,9 +6,7 @@
     xmlns:local="clr-namespace:HeldInvoiceReleaser.Maui"
     Shell.TabBarIsVisible="False"
     Shell.NavBarIsVisible="False"
-    xmlns:startupPages="clr-namespace:HeldInvoiceReleaser.Maui.Pages.Startup"
-    Shell.FlyoutBehavior="Disabled"
-    >
+    xmlns:startupPages="clr-namespace:HeldInvoiceReleaser.Maui.Pages.Startup">
 
     <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
                   ContentTemplate="{DataTemplate startupPages:LoadingPage}" Route="LoadingPage" />
@@ -18,4 +16,9 @@
         ContentTemplate="{DataTemplate startupPages:LoginPage}"
         Route="LoginPage" />
 
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign Out" Command="{Binding SignOutCommand}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
 </Shell>

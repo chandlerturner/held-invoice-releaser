@@ -1,6 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using FluentValidation;
 using HeldInvoiceReleaser.Maui.Models.Commands;
+using HeldInvoiceReleaser.Maui.Pages;
 using HeldInvoiceReleaser.Maui.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -32,7 +33,35 @@ public partial class LoginPageViewModel : BaseViewModel
         var loginResult = await CreateCommand()
             .Bind(CallLoginApi)
             .TapError(error => LoginError = error)
-            .Tap(SavePreferences);
+            .Tap(SavePreferences)
+            .Tap(LoadPages);
+    }
+
+    private async Task LoadPages()
+    {
+        var flyoutItem = new FlyoutItem()
+        {
+            Title = "Release Held Invoices",
+            Route = nameof(MainPage),
+            FlyoutDisplayOptions = FlyoutDisplayOptions.AsSingleItem,
+            Items =
+            {
+                new ShellContent
+                {
+                    Icon = Icons.Main,
+                    Title = "Admin Dashboard",
+                    ContentTemplate = new DataTemplate(typeof(MainPage)),
+                }
+            }
+        };
+
+        if (!Shell.Current.Items.Contains(flyoutItem))
+        {
+            Shell.Current.Items.Add(flyoutItem);
+        }
+
+        // TODO: Fix bug when loading after sign-out
+        await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
     }
 
     private Result<LoginCommand> CreateCommand()

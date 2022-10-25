@@ -1,4 +1,5 @@
-﻿using CSharpFunctionalExtensions;
+﻿using System.Net.Http.Json;
+using CSharpFunctionalExtensions;
 using HeldInvoiceReleaser.Maui.Models.Commands;
 
 namespace HeldInvoiceReleaser.Maui.Services;
@@ -21,7 +22,7 @@ public class InvoiceApiService : IInvoiceApiService
         var client = _httpClientFactory.CreateClient();
         try
         {
-            var response = await client.GetAsync($"{loginCommand.ServerAddress}/auth");
+            var response = await client.PostAsync($"{loginCommand.ServerAddress}/auth", JsonContent.Create(new {location = loginCommand.Location}));
             return response.IsSuccessStatusCode
                 ? Result.Success()
                 : Result.Failure(response.StatusCode.ToString());

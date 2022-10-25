@@ -15,7 +15,7 @@
                 <Image Source="server.png" HeightRequest="30" WidthRequest="30" />
             </Frame>
             <Frame HeightRequest="47" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
-                <handlers:BorderlessEntry Text="{Binding Server}" Margin="30,0,0,0" VerticalOptions="Center" Placeholder="ServerAddress Address" Keyboard="Url"/>
+                <handlers:BorderlessEntry Text="{Binding ServerAddress}" Margin="30,0,0,0" VerticalOptions="Center" Placeholder="Server Address" Keyboard="Url"/>
             </Frame>
         </StackLayout>
 
