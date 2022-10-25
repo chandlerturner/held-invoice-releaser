@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5396EDF3-AD8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeldInvoiceReleaser.Maui", "src\HeldInvoiceReleaser.Maui\HeldInvoiceReleaser.Maui.csproj", "{BDFB4667-7E90-41FA-81E9-F4B4496366C3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeldInvoiceReleaser", "src\HeldInvoiceRelease\HeldInvoiceReleaser.csproj", "{AF1B7B9A-9F7C-4DA9-868C-91D285D4992F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,12 +20,17 @@ Global
 		{BDFB4667-7E90-41FA-81E9-F4B4496366C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{BDFB4667-7E90-41FA-81E9-F4B4496366C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDFB4667-7E90-41FA-81E9-F4B4496366C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF1B7B9A-9F7C-4DA9-868C-91D285D4992F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF1B7B9A-9F7C-4DA9-868C-91D285D4992F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF1B7B9A-9F7C-4DA9-868C-91D285D4992F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF1B7B9A-9F7C-4DA9-868C-91D285D4992F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BDFB4667-7E90-41FA-81E9-F4B4496366C3} = {5396EDF3-AD8D-4D21-B8D9-10AE935C65F5}
+		{AF1B7B9A-9F7C-4DA9-868C-91D285D4992F} = {5396EDF3-AD8D-4D21-B8D9-10AE935C65F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3AADCD76-661D-4AC8-B8F3-08908B044381}
