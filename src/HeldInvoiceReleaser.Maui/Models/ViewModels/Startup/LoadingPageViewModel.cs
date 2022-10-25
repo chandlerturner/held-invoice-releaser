@@ -1,6 +1,6 @@
 ﻿using HeldInvoiceReleaser.Maui.Pages.Startup;
 
-namespace HeldInvoiceReleaser.Maui.Models.ViewModels;
+namespace HeldInvoiceReleaser.Maui.Models.ViewModels.Startup;
 
 public class LoadingPageViewModel
 {

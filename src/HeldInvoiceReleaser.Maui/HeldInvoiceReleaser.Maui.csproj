@@ -54,6 +54,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CSharpFunctionalExtensions" Version="2.35.1" />
+	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
+	  <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
 	  <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 	</ItemGroup>
 
@@ -73,10 +76,6 @@
 	  <MauiXaml Update="Pages\Startup\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>

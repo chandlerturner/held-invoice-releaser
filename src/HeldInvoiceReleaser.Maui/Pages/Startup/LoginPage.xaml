@@ -15,7 +15,7 @@
                 <Image Source="server.png" HeightRequest="30" WidthRequest="30" />
             </Frame>
             <Frame HeightRequest="47" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
-                <handlers:BorderlessEntry Text="{Binding Server}" Margin="30,0,0,0" VerticalOptions="Center" Placeholder="Server Address" Keyboard="Email" />
+                <handlers:BorderlessEntry Text="{Binding Server}" Margin="30,0,0,0" VerticalOptions="Center" Placeholder="Server Address" Keyboard="Url"/>
             </Frame>
         </StackLayout>
 
@@ -25,12 +25,15 @@
                 <Image Source="building.png" HeightRequest="30" WidthRequest="30" />
             </Frame>
             <Frame HeightRequest="47" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand">
-                <handlers:BorderlessEntry Text="{Binding Location}" Margin="30,0,0,0" VerticalOptions="Center" Placeholder="Location" IsPassword="True" />
+                <handlers:BorderlessEntry Text="{Binding Location}" Margin="30,0,0,0" VerticalOptions="Center" Placeholder="Location" IsPassword="False" Keyboard="Plain" />
             </Frame>
         </StackLayout>
 
 
-        <Button Text="Sign In" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" Command="{Binding LoginCommand}" />
+        <StackLayout>
+            <Label TextColor="Red" Text="{Binding LoginError}"/>
+            <Button Text="Sign In" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" Command="{Binding LoginCommand}" />
+        </StackLayout>
 
     </VerticalStackLayout>
 </ContentPage>
