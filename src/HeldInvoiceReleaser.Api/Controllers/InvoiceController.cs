@@ -18,12 +18,12 @@ public class InvoiceController : ControllerBase
         _databaseService = databaseService;
     }
 
-    [HttpGet]
+    [HttpGet("/location/{location}/invoices")]
     [ProducesResponseType(typeof(IEnumerable<HeldInvoice>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get(string location)
     {
-        var result = await _databaseService.GetAllHeldInvoicesByLocation("");
+        var result = await _databaseService.GetAllHeldInvoicesByLocation(location);
         return result.IsSuccess
             ? Ok(result.Value)
             : BadRequest(result.Error);

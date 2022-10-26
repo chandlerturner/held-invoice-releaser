@@ -1,6 +1,8 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using CSharpFunctionalExtensions;
+using HeldInvoiceReleaser.Maui.Models.Queries;
+using HeldInvoiceReleaser.Maui.Services;
 using HeldInvoiceReleaser.Models;
 using Microsoft.Toolkit.Mvvm.Input;
 
@@ -8,24 +10,28 @@ namespace HeldInvoiceReleaser.Maui.Models.ViewModels;
 
 public partial class MainPageViewModel : BaseViewModel
 {
-    private readonly IConnectivity _connectivity;
-    [ObservableProperty]
-    [AlsoNotifyChangeFor(nameof(NotGettingOrders))]
+    private readonly IInvoiceApiService _invoiceApiService;
+
+    [ObservableProperty] [AlsoNotifyChangeFor(nameof(NotGettingOrders))]
     bool gettingOrders;
 
     public bool NotGettingOrders => !GettingOrders;
     public ObservableCollection<HeldInvoice> Orders { get; } = new();
 
-    public MainPageViewModel(/*IConnectivity connectivity*/)
+    private string Location => Preferences.Get("Location", "");
+    private string ServerAddress => Preferences.Get("ServerAddress", "");
+
+    public MainPageViewModel(IInvoiceApiService invoiceApiService)
     {
-        //_connectivity = connectivity;
+        _invoiceApiService = invoiceApiService;
     }
 
 
     [ICommand]
     public async Task ReleaseWithConfirmationAsync(HeldInvoice order)
     {
-        var confirmed = await Shell.Current.DisplayAlert("Release Order?", $"Are you sure you want to release pick ticket {order.PickTicketNumber}?", "Yes", "No");
+        var confirmed = await Shell.Current.DisplayAlert("Release Order?",
+            $"Are you sure you want to release pick ticket {order.PickTicketNumber}?", "Yes", "No");
         if (confirmed)
         {
             //await _orderRepo.ReleaseOrder(order);
@@ -41,20 +47,20 @@ public partial class MainPageViewModel : BaseViewModel
         try
         {
             GettingOrders = true;
-            await Task.Delay(TimeSpan.FromSeconds(3));
             if (Orders.Count != 0) Orders.Clear();
-            var ordersFromRepoResult = Result.Failure<IEnumerable<HeldInvoice>>("get it together"); //await _orderRepo.GetAllReleasableOrders();
-            if (ordersFromRepoResult.IsSuccess)
+            var query = new GetHeldInvoicesByLocationQuery() { Location = Location, ServerAddress = ServerAddress };
+            var heldInvoicesByLocationResult = await _invoiceApiService.GetHeldInvoicesByLocation(query);
+            if (heldInvoicesByLocationResult.IsSuccess)
             {
-                var ordersFromRepo = ordersFromRepoResult.Value;
-                foreach (var order in ordersFromRepo.Take(11))
+                var heldInvoices = heldInvoicesByLocationResult.Value;
+                foreach (var order in heldInvoices)
                 {
                     Orders.Add(order);
                 }
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Yikes", ordersFromRepoResult.Error, "OK");
+                await Application.Current.MainPage.DisplayAlert("Yikes", heldInvoicesByLocationResult.Error, "OK");
             }
         }
         catch (Exception ex)
