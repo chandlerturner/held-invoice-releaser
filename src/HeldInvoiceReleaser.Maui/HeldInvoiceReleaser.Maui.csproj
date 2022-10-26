@@ -61,7 +61,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\HeldInvoiceRelease\HeldInvoiceReleaser.csproj" />
+	  <ProjectReference Include="..\HeldInvoiceReleaser\HeldInvoiceReleaser.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
