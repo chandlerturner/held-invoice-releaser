@@ -19,7 +19,11 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+
+                fonts.AddFont("Lato/Lato-Regular.ttf", "LatoRegular");
+                fonts.AddFont("Lato/Lato-Bold.ttf", "LatoBold");
+                fonts.AddFont("Lato/Lato-Black.ttf", "LatoBlack");
+            });
 
         builder.Services.AddHttpClient();
 
