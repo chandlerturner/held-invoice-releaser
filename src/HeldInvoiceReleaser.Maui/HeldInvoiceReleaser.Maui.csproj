@@ -62,6 +62,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\HeldInvoiceReleaser.Api.Shared\HeldInvoiceReleaser.Api.Shared.csproj" />
 	  <ProjectReference Include="..\HeldInvoiceReleaser\HeldInvoiceReleaser.csproj" />
 	</ItemGroup>
 

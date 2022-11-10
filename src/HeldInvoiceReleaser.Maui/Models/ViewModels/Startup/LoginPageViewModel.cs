@@ -34,7 +34,14 @@ public partial class LoginPageViewModel : BaseViewModel
             .Bind(CallLoginApi)
             .TapError(error => LoginError = error)
             .Tap(SavePreferences)
+            .Tap(SaveToken)
             .Tap(LoadPages);
+    }
+
+    private async Task SaveToken(string token)
+    {
+        SecureStorage.Remove("token");
+        await SecureStorage.SetAsync("token", token);
     }
 
     private async Task LoadPages()
@@ -49,7 +56,7 @@ public partial class LoginPageViewModel : BaseViewModel
                 new ShellContent
                 {
                     Icon = Icons.Main,
-                    Title = "Admin Dashboard",
+                    Title = "Release Held Invoices",
                     ContentTemplate = new DataTemplate(typeof(MainPage)),
                 }
             }
@@ -74,9 +81,10 @@ public partial class LoginPageViewModel : BaseViewModel
                 string.Join('|', validationResult.Errors.Select(error => error.ErrorMessage)));
     }
 
-    private async Task<Result> CallLoginApi(LoginCommand loginCommand)
+    private async Task<Result<string>> CallLoginApi(LoginCommand loginCommand)
     {
-        return await _invoiceApiService.Login(loginCommand);
+        var loginResult =  await _invoiceApiService.Login(loginCommand);
+        return loginResult;
     }
 
     private void SavePreferences()

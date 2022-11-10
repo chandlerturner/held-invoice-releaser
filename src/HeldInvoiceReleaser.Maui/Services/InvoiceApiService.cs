@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using CSharpFunctionalExtensions;
+using HeldInvoiceReleaser.Api.Shared.Requests;
 using HeldInvoiceReleaser.Maui.Models.Commands;
 using HeldInvoiceReleaser.Maui.Models.Queries;
 using HeldInvoiceReleaser.Models;
@@ -9,7 +10,7 @@ namespace HeldInvoiceReleaser.Maui.Services;
 
 public interface IInvoiceApiService
 {
-    Task<Result> Login(LoginCommand loginCommand);
+    Task<Result<string>> Login(LoginCommand loginCommand);
     Task<Result<IEnumerable<HeldInvoice>>> GetHeldInvoicesByLocation(GetHeldInvoicesByLocationQuery query);
 }
 
@@ -21,19 +22,19 @@ public class InvoiceApiService : IInvoiceApiService
     {
         _httpClientFactory = httpClientFactory;
     }
-    public async Task<Result> Login(LoginCommand loginCommand)
+    public async Task<Result<string>> Login(LoginCommand loginCommand)
     {
         var client = _httpClientFactory.CreateClient();
         try
         {
-            var response = await client.PostAsync($"{loginCommand.ServerAddress}/auth", JsonContent.Create(new {location = loginCommand.Location}));
+            var response = await client.PostAsync($"{loginCommand.ServerAddress}/auth", JsonContent.Create(new AuthRequest{Location = loginCommand.Location}));
             return response.IsSuccessStatusCode
-                ? Result.Success()
-                : Result.Failure(response.StatusCode.ToString());
+                ? Result.Success(await response.Content.ReadAsStringAsync())
+                : Result.Failure<string>(response.StatusCode.ToString());
         }
         catch (Exception ex)
         {
-            return Result.Failure(ex.Message);
+            return Result.Failure<string>(ex.Message);
         }
     }
 

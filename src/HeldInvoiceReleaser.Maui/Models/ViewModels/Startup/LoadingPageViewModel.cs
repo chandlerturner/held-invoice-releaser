@@ -4,13 +4,8 @@ namespace HeldInvoiceReleaser.Maui.Models.ViewModels.Startup;
 
 public class LoadingPageViewModel
 {
-    public LoadingPageViewModel()
+    public async void Initialize()
     {
-        NavigateToLogin();
-    }
-    private async void NavigateToLogin()
-    {
-        await Task.Delay(TimeSpan.FromSeconds(1));
         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
     }
 }

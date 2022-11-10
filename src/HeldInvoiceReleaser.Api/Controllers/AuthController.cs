@@ -1,5 +1,5 @@
 using HeldInvoiceReleaser.Api.Services;
-using HeldInvoiceReleaser.Models;
+using HeldInvoiceReleaser.Api.Shared.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeldInvoiceReleaser.Api.Controllers;
@@ -10,15 +10,18 @@ public class AuthController : ControllerBase
 {
 
     private readonly ILogger<AuthController> _logger;
+    private readonly ITokenService _tokenService;
 
-    public AuthController(ILogger<AuthController> logger)
+    public AuthController(ILogger<AuthController> logger, ITokenService tokenService)
     {
         _logger = logger;
+        _tokenService = tokenService;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post()
+    public async Task<IActionResult> Post(AuthRequest request, CancellationToken cancellationToken = default)
     {
-        return Ok();
+        var token = await Task.Run(() => _tokenService.BuildToken(request.Location), cancellationToken);
+        return Ok(token);
     }
 }

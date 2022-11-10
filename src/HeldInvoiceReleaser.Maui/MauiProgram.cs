@@ -27,6 +27,7 @@ public static class MauiProgram
 
         builder.Services.AddHttpClient();
 
+
         builder.Services.AddTransient<LoadingPage>();
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<MainPage>();
@@ -35,6 +36,7 @@ public static class MauiProgram
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddTransient<MainPageViewModel>();
 
+        builder.Services.AddSingleton<IRoutingService, ShellRoutingService>();
         builder.Services.AddSingleton<IInvoiceApiService, InvoiceApiService>();
         builder.Services.AddTransient<IValidator<LoginCommand>, LoginCommandValidator>();
 

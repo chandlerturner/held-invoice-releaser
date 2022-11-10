@@ -4,21 +4,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:HeldInvoiceReleaser.Maui.Models.ViewModels"
              xmlns:models="clr-namespace:HeldInvoiceReleaser.Models;assembly=HeldInvoiceReleaser"
-             x:Class="HeldInvoiceReleaser.Maui.Pages.MainPage">
+             x:Class="HeldInvoiceReleaser.Maui.Pages.MainPage"
+             Shell.NavBarIsVisible="True">
 
     <Grid ColumnDefinitions="*,*"
           ColumnSpacing="5"
-          RowDefinitions="Auto,*,Auto">
+          RowDefinitions="*,Auto">
 
-        <Image Grid.Row="0"
-               Grid.ColumnSpan="2"
-               Source="logo.png"
-               SemanticProperties.Description="The Austin Hose Logo"
-               WidthRequest="259"
-               HeightRequest="59"
-               HorizontalOptions="Center" />
 
-        <CollectionView Grid.Row="1"
+        <CollectionView Grid.Row="0"
                         Grid.ColumnSpan="2"
                         ItemsSource="{Binding Orders}"
                         SelectionMode="None">
@@ -56,7 +50,7 @@
         <Button Text="Refresh Orders" 
                 Command="{Binding GetOrdersCommand}"
                 IsEnabled="{Binding NotGettingOrders}"
-                Grid.Row="2"
+                Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Style="{StaticResource ButtonPrimarySolid}"
                 Margin="8"/>
@@ -66,7 +60,7 @@
                            IsRunning="{Binding GettingOrders}"
                            HorizontalOptions="FillAndExpand"
                            VerticalOptions="CenterAndExpand"
-                           Grid.RowSpan="3"
+                           Grid.RowSpan="2"
                            Grid.ColumnSpan="3"/>
     </Grid>
 </ContentPage>

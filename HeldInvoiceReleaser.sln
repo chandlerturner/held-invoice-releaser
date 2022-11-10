@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeldInvoiceReleaser", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeldInvoiceReleaser.Api", "src\HeldInvoiceReleaser.Api\HeldInvoiceReleaser.Api.csproj", "{44E59CA8-A8FF-41D0-8CA6-612DAE5268D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeldInvoiceReleaser.Api.Shared", "src\HeldInvoiceReleaser.Api.Shared\HeldInvoiceReleaser.Api.Shared.csproj", "{36C14BF8-BC23-4060-BCBE-7719327A3906}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{44E59CA8-A8FF-41D0-8CA6-612DAE5268D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44E59CA8-A8FF-41D0-8CA6-612DAE5268D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44E59CA8-A8FF-41D0-8CA6-612DAE5268D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36C14BF8-BC23-4060-BCBE-7719327A3906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C14BF8-BC23-4060-BCBE-7719327A3906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36C14BF8-BC23-4060-BCBE-7719327A3906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36C14BF8-BC23-4060-BCBE-7719327A3906}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 		{BDFB4667-7E90-41FA-81E9-F4B4496366C3} = {5396EDF3-AD8D-4D21-B8D9-10AE935C65F5}
 		{AF1B7B9A-9F7C-4DA9-868C-91D285D4992F} = {5396EDF3-AD8D-4D21-B8D9-10AE935C65F5}
 		{44E59CA8-A8FF-41D0-8CA6-612DAE5268D5} = {5396EDF3-AD8D-4D21-B8D9-10AE935C65F5}
+		{36C14BF8-BC23-4060-BCBE-7719327A3906} = {5396EDF3-AD8D-4D21-B8D9-10AE935C65F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3AADCD76-661D-4AC8-B8F3-08908B044381}
