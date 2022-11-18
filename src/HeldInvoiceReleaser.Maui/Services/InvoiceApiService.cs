@@ -12,6 +12,7 @@ public interface IInvoiceApiService
 {
     Task<Result<string>> Login(LoginCommand loginCommand);
     Task<Result<IEnumerable<HeldInvoice>>> GetHeldInvoicesByLocation(GetHeldInvoicesByLocationQuery query);
+    Task<Result> ReleaseHeldInvoice(ReleaseHeldInvoiceCommand command);
 }
 
 public class InvoiceApiService : IInvoiceApiService
@@ -47,6 +48,24 @@ public class InvoiceApiService : IInvoiceApiService
             return response.IsSuccessStatusCode
                 ? await ExtractInvoicesFromResponse(response)
                 : Result.Failure<IEnumerable<HeldInvoice>>($"Failed to get data from server. {await ExtractErrorFromResponse(response)}");
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure<IEnumerable<HeldInvoice>>(ex.Message);
+        }
+    }
+
+    public async Task<Result> ReleaseHeldInvoice(ReleaseHeldInvoiceCommand command)
+    {
+
+        var client = _httpClientFactory.CreateClient();
+        try
+        {
+            var response = await client.PostAsync($"{command.ServerAddress}/location/{command.LocationId}/invoices/release/pickTicket", 
+                JsonContent.Create(new ReleasePicketTicketInvoiceRequest{PicketTicket = command.PickTicket}));
+            return response.IsSuccessStatusCode
+                ? Result.Success()
+                : Result.Failure($"Failed to get data from server. {await ExtractErrorFromResponse(response)}");
         }
         catch (Exception ex)
         {

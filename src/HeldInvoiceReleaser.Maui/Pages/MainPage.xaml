@@ -27,7 +27,7 @@
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                                     <Label Style="{StaticResource LargeLabel}" Text="Pick Ticket: " />
-                                    <Label Style="{StaticResource LargeBoldLabel}" Text="{Binding PickTicketNumber}" />
+                                    <Label Style="{StaticResource LargeBoldLabel}" Text="{Binding PickTicket}" />
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                                     <Label Style="{StaticResource LargeLabel}" Text="Purchase Order: " />

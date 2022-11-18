@@ -3,7 +3,7 @@ public class HeldInvoice
 {
     public string? ShipToName { get; set; }
     public string? CustomerPurchaseOrder { get; set; }
-    public string PickTicketNumber { get; set; } = default!;
+    public string PickTicket { get; set; } = default!;
     public string? ShippingOrderNumber { get; set; }
     public string? PickedBy { get; set; }
     public string? ContactName { get; set; }

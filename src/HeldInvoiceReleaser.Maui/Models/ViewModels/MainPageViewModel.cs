@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HeldInvoiceReleaser.Maui.Models.Commands;
 using HeldInvoiceReleaser.Maui.Models.Queries;
 using HeldInvoiceReleaser.Maui.Services;
 using HeldInvoiceReleaser.Models;
@@ -27,13 +28,14 @@ public partial class MainPageViewModel : BaseViewModel
 
 
     [RelayCommand]
-    public async Task ReleaseWithConfirmationAsync(HeldInvoice order)
+    public async Task ReleaseWithConfirmationAsync(HeldInvoice invoice)
     {
-        var confirmed = await Shell.Current.DisplayAlert("Release Order?",
-            $"Are you sure you want to release pick ticket {order.PickTicketNumber}?", "Yes", "No");
+        var confirmed = await Shell.Current.DisplayAlert("Release Invoice?",
+            $"Release invoice with pick ticket {invoice.PickTicket}?", "Yes", "No");
         if (confirmed)
         {
-            //await _orderRepo.ReleaseOrder(order);
+            var command = new ReleaseHeldInvoiceCommand() { ServerAddress = ServerAddress, LocationId = Location, PickTicket = invoice.PickTicket };
+            var result = await _invoiceApiService.ReleaseHeldInvoice(command);
             await GetOrdersAsync();
         }
     }
