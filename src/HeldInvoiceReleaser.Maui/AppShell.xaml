@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:HeldInvoiceReleaser.Maui"
     Shell.TabBarIsVisible="False"
     Shell.NavBarIsVisible="False"
+    xmlns:pages="clr-namespace:HeldInvoiceReleaser.Maui.Pages"
     xmlns:startupPages="clr-namespace:HeldInvoiceReleaser.Maui.Pages.Startup">
 
     <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
@@ -15,6 +16,11 @@
         Title="Login Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
         ContentTemplate="{DataTemplate startupPages:LoginPage}"
         Route="LoginPage" />
+
+    <!--<ShellContent 
+        Title="Main Page" FlyoutItemIsVisible="True" Shell.FlyoutBehavior="Flyout"
+        ContentTemplate="{DataTemplate pages:MainPage}"
+        Route="MainPage" />-->
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">

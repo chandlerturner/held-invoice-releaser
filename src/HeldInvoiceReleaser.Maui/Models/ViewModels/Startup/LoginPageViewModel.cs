@@ -1,36 +1,38 @@
-﻿using CSharpFunctionalExtensions;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CSharpFunctionalExtensions;
 using FluentValidation;
 using HeldInvoiceReleaser.Maui.Models.Commands;
 using HeldInvoiceReleaser.Maui.Pages;
 using HeldInvoiceReleaser.Maui.Services;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
 
 namespace HeldInvoiceReleaser.Maui.Models.ViewModels;
 
 public partial class LoginPageViewModel : BaseViewModel
 {
     [ObservableProperty] private string _serverAddress;
-    [ObservableProperty] private string _location;
+    [ObservableProperty] private string _locationId;
     [ObservableProperty] private string _loginError;
 
     private readonly IInvoiceApiService _invoiceApiService;
     private readonly IValidator<LoginCommand> _loginCommandValidator;
+    private readonly IRoutingService _routingService;
 
-    public LoginPageViewModel(IInvoiceApiService invoiceApiService, IValidator<LoginCommand> loginCommandValidator)
+    public LoginPageViewModel(IInvoiceApiService invoiceApiService, IValidator<LoginCommand> loginCommandValidator, IRoutingService routingService)
     {
         _invoiceApiService = invoiceApiService;
         _loginCommandValidator = loginCommandValidator;
+        _routingService = routingService;
 
         ServerAddress = Preferences.Get(nameof(ServerAddress), string.Empty);
-        Location = Preferences.Get(nameof(Location), string.Empty);
+        LocationId = Preferences.Get(nameof(Location), string.Empty);
     }
 
-    [ICommand]
-    async void Login()
+    [RelayCommand]
+    public async Task Login()
     {
         LoginError = string.Empty;
-        var loginResult = await CreateCommand()
+        var loginResult =  await CreateCommand()
             .Bind(CallLoginApi)
             .TapError(error => LoginError = error)
             .Tap(SavePreferences)
@@ -46,34 +48,12 @@ public partial class LoginPageViewModel : BaseViewModel
 
     private async Task LoadPages()
     {
-        var flyoutItem = new FlyoutItem()
-        {
-            Title = "Release Held Invoices",
-            Route = nameof(MainPage),
-            FlyoutDisplayOptions = FlyoutDisplayOptions.AsSingleItem,
-            Items =
-            {
-                new ShellContent
-                {
-                    Icon = Icons.Main,
-                    Title = "Release Held Invoices",
-                    ContentTemplate = new DataTemplate(typeof(MainPage)),
-                }
-            }
-        };
-
-        if (!Shell.Current.Items.Contains(flyoutItem))
-        {
-            Shell.Current.Items.Add(flyoutItem);
-        }
-
-        // TODO: Fix bug when loading after sign-out
-        await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+        await _routingService.NavigateToAsync(nameof(MainPage));
     }
 
     private Result<LoginCommand> CreateCommand()
     {
-        LoginCommand loginCommand = new() { ServerAddress = ServerAddress, Location = Location };
+        LoginCommand loginCommand = new() { ServerAddress = ServerAddress, Location = LocationId };
         var validationResult = _loginCommandValidator.Validate(loginCommand);
         return validationResult.IsValid
             ? loginCommand
@@ -100,6 +80,6 @@ public partial class LoginPageViewModel : BaseViewModel
         }
 
         Preferences.Set(nameof(ServerAddress), ServerAddress);
-        Preferences.Set(nameof(Location), Location);
+        Preferences.Set(nameof(Location), LocationId);
     }
 }

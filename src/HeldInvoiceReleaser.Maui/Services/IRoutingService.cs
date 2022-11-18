@@ -2,7 +2,5 @@
 
 public interface IRoutingService
 {
-    Task GoBack();
-    Task GoBackModal();
-    Task NavigateTo(string route);
+    Task NavigateToAsync(string route);
 }

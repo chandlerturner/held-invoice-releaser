@@ -1,19 +1,15 @@
-﻿namespace HeldInvoiceReleaser.Maui.Services;
+﻿using HeldInvoiceReleaser.Maui.Pages;
+
+namespace HeldInvoiceReleaser.Maui.Services;
 
 public class ShellRoutingService : IRoutingService
 {
-    public Task NavigateTo(string route)
+    public async Task NavigateToAsync(string route)
     {
-        return Shell.Current.GoToAsync(route);
-    }
-
-    public Task GoBack()
-    {
-        return Shell.Current.Navigation.PopAsync();
-    }
-
-    public Task GoBackModal()
-    {
-        return Shell.Current.Navigation.PopModalAsync();
+        Task GoToPage() => Shell.Current.GoToAsync(route);
+        if (MainThread.IsMainThread)
+            await GoToPage();
+        else
+            MainThread.BeginInvokeOnMainThread(async () => await GoToPage());
     }
 }

@@ -55,10 +55,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="CSharpFunctionalExtensions" Version="2.35.1" />
 	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
 	  <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-	  <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 	</ItemGroup>
 
 	<ItemGroup>

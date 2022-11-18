@@ -1,10 +1,9 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System.Collections.ObjectModel;
-using CSharpFunctionalExtensions;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using HeldInvoiceReleaser.Maui.Models.Queries;
 using HeldInvoiceReleaser.Maui.Services;
 using HeldInvoiceReleaser.Models;
-using Microsoft.Toolkit.Mvvm.Input;
 
 namespace HeldInvoiceReleaser.Maui.Models.ViewModels;
 
@@ -12,8 +11,8 @@ public partial class MainPageViewModel : BaseViewModel
 {
     private readonly IInvoiceApiService _invoiceApiService;
 
-    [ObservableProperty] [AlsoNotifyChangeFor(nameof(NotGettingOrders))]
-    bool gettingOrders;
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(NotGettingOrders))]
+    bool _gettingOrders;
 
     public bool NotGettingOrders => !GettingOrders;
     public ObservableCollection<HeldInvoice> Orders { get; } = new();
@@ -27,7 +26,7 @@ public partial class MainPageViewModel : BaseViewModel
     }
 
 
-    [ICommand]
+    [RelayCommand]
     public async Task ReleaseWithConfirmationAsync(HeldInvoice order)
     {
         var confirmed = await Shell.Current.DisplayAlert("Release Order?",
@@ -39,8 +38,8 @@ public partial class MainPageViewModel : BaseViewModel
         }
     }
 
-    [ICommand]
-    async Task GetOrdersAsync()
+    [RelayCommand]
+    public async Task GetOrdersAsync()
     {
         if (GettingOrders) return;
 
