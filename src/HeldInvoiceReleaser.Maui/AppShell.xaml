@@ -17,10 +17,13 @@
         ContentTemplate="{DataTemplate startupPages:LoginPage}"
         Route="LoginPage" />
 
-    <!--<ShellContent 
-        Title="Main Page" FlyoutItemIsVisible="True" Shell.FlyoutBehavior="Flyout"
-        ContentTemplate="{DataTemplate pages:MainPage}"
-        Route="MainPage" />-->
+    <FlyoutItem Title = "Release Held Invoices"
+                Route = "MainPage">
+        <ShellContent 
+            Title="Main Page" FlyoutItemIsVisible="True" Shell.FlyoutBehavior="Flyout"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            />
+    </FlyoutItem>
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">

@@ -15,7 +15,7 @@
 		<ApplicationTitle>HeldInvoiceReleaser.Maui</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.heldinvoicereleaser.maui</ApplicationId>
+		<ApplicationId>com.chandlerturner.heldinvoicereleaser.maui</ApplicationId>
 		<ApplicationIdGuid>bdc25006-6cd7-4a52-838c-0831353b4e25</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -28,6 +28,15 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+		<AndroidKeyStore>True</AndroidKeyStore>
+		<AndroidSigningKeyStore>Platforms/Android/heldInvoiceReleaser.keystore</AndroidSigningKeyStore>
+		<AndroidSigningKeyAlias>key</AndroidSigningKeyAlias>
+		<AndroidSigningKeyPass></AndroidSigningKeyPass>
+		<AndroidSigningStorePass></AndroidSigningStorePass>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:HeldInvoiceReleaser.Maui.Models.ViewModels"
              xmlns:models="clr-namespace:HeldInvoiceReleaser.Models;assembly=HeldInvoiceReleaser"
-             x:Class="HeldInvoiceReleaser.Maui.Pages.MainPage"
-             Shell.NavBarIsVisible="False">
+             x:Class="HeldInvoiceReleaser.Maui.Pages.MainPage">
 
     <Grid ColumnDefinitions="*,*"
           ColumnSpacing="5"

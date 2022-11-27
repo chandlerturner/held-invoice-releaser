@@ -25,7 +25,10 @@ public static class MauiProgram
                 fonts.AddFont("Lato/Lato-Black.ttf", "LatoBlack");
             });
 
-        builder.Services.AddHttpClient();
+        builder.Services.AddHttpClient(string.Empty, client =>
+        {
+            client.Timeout = TimeSpan.FromSeconds(5);
+        });
 
 
         builder.Services.AddTransient<LoadingPage>();

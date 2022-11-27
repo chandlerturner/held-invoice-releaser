@@ -48,7 +48,7 @@ public partial class LoginPageViewModel : BaseViewModel
 
     private async Task LoadPages()
     {
-        await _routingService.NavigateToAsync(nameof(MainPage));
+        await _routingService.NavigateToAsync($"//{nameof(MainPage)}");
     }
 
     private Result<LoginCommand> CreateCommand()

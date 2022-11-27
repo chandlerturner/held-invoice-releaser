@@ -16,7 +16,6 @@
 
     <Style TargetType="Label" x:Key="BaseLabel">
         <Setter Property="FontFamily" Value="LatoRegular" />
-        <Setter Property="TextColor" Value="{StaticResource DarkText}" />
     </Style>
 
     <Style x:Key="MicroLabel" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
@@ -53,18 +52,15 @@
 
     <Style x:Key="ButtonOutline" BasedOn="{StaticResource BaseButton}" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource LightBackground}" />
-        <Setter Property="TextColor" Value="{StaticResource DarkText}" />
         <Setter Property="BorderColor" Value="{StaticResource Primary}" />
     </Style>
 
     <Style x:Key="ButtonPrimarySolid" BasedOn="{StaticResource BaseButton}" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource Primary}" />
-        <Setter Property="TextColor" Value="{StaticResource DarkText}" />
         <Setter Property="BorderColor" Value="{StaticResource Gray100}" />
     </Style>
 
     <Style x:Key="ButtonInvertedSolid" BasedOn="{StaticResource BaseButton}" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource Gray500}" />
         <Setter Property="TextColor" Value="{StaticResource Primary}" />
         <Setter Property="BorderColor" Value="{StaticResource Gray100}" />
     </Style>
