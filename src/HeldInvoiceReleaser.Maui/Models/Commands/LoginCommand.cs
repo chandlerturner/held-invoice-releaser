@@ -5,7 +5,7 @@ namespace HeldInvoiceReleaser.Maui.Models.Commands
     public class LoginCommand
     {
         public string ServerAddress { get; set; }
-        public string Location { get; set; }
+        public string LocationId { get; set; }
     }
 
     public class LoginCommandValidator : AbstractValidator<LoginCommand>

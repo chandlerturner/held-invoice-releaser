@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Configuration.AddUserSecrets(Assembly.GetEntryAssembly());
 ConfigureServices();
-
 var app = builder.Build();
+
+app.UseDeveloperExceptionPage();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -36,7 +36,7 @@
                     <RoundRectangle CornerRadius="40"></RoundRectangle>
                 </Border.StrokeShape>
                 <handlers:BorderlessEntry 
-                    Text="{Binding Location}" 
+                    Text="{Binding LocationId}" 
                     Margin="30,0,0,0"  
                     VerticalOptions="Center" 
                     Placeholder="20" 

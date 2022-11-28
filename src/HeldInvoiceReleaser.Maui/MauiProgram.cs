@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using System.Net;
+using System.Security.Authentication;
+using FluentValidation;
 using HeldInvoiceReleaser.Maui.Models.Commands;
 using HeldInvoiceReleaser.Maui.Models.ViewModels;
 using HeldInvoiceReleaser.Maui.Models.ViewModels.Startup;
@@ -24,11 +26,7 @@ public static class MauiProgram
                 fonts.AddFont("Lato/Lato-Bold.ttf", "LatoBold");
                 fonts.AddFont("Lato/Lato-Black.ttf", "LatoBlack");
             });
-
-        builder.Services.AddHttpClient(string.Empty, client =>
-        {
-            client.Timeout = TimeSpan.FromSeconds(5);
-        });
+        
 
 
         builder.Services.AddTransient<LoadingPage>();
@@ -45,4 +43,7 @@ public static class MauiProgram
 
 		return builder.Build();
 	}
+
 }
+
+

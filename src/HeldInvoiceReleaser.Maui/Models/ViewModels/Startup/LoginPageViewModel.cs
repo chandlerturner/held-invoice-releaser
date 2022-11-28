@@ -25,7 +25,7 @@ public partial class LoginPageViewModel : BaseViewModel
         _routingService = routingService;
 
         ServerAddress = Preferences.Get(nameof(ServerAddress), string.Empty);
-        LocationId = Preferences.Get(nameof(Location), string.Empty);
+        LocationId = Preferences.Get(nameof(LocationId), string.Empty);
     }
 
     [RelayCommand]
@@ -53,7 +53,7 @@ public partial class LoginPageViewModel : BaseViewModel
 
     private Result<LoginCommand> CreateCommand()
     {
-        LoginCommand loginCommand = new() { ServerAddress = ServerAddress, Location = LocationId };
+        LoginCommand loginCommand = new() { ServerAddress = ServerAddress, LocationId = LocationId };
         var validationResult = _loginCommandValidator.Validate(loginCommand);
         return validationResult.IsValid
             ? loginCommand
@@ -67,19 +67,19 @@ public partial class LoginPageViewModel : BaseViewModel
         return loginResult;
     }
 
-    private void SavePreferences()
+    private async Task SavePreferences()
     {
         if (Preferences.ContainsKey(nameof(ServerAddress)))
         {
             Preferences.Remove(nameof(ServerAddress));
         }
 
-        if (Preferences.ContainsKey(nameof(Location)))
+        if (Preferences.ContainsKey(nameof(LocationId)))
         {
-            Preferences.Remove(nameof(Location));
+            Preferences.Remove(nameof(LocationId));
         }
 
         Preferences.Set(nameof(ServerAddress), ServerAddress);
-        Preferences.Set(nameof(Location), LocationId);
+        Preferences.Set(nameof(LocationId), LocationId);
     }
 }

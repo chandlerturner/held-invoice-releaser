@@ -18,7 +18,7 @@ public partial class MainPageViewModel : BaseViewModel
     public bool NotGettingOrders => !GettingOrders;
     public ObservableCollection<HeldInvoice> Orders { get; } = new();
 
-    private string Location => Preferences.Get("Location", "");
+    private string Location => Preferences.Get("LocationId", "");
     private string ServerAddress => Preferences.Get("ServerAddress", "");
 
     public MainPageViewModel(IInvoiceApiService invoiceApiService)
