@@ -1,11 +1,11 @@
 ﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using CSharpFunctionalExtensions;
 using HeldInvoiceReleaser.Api.Shared.Requests;
 using HeldInvoiceReleaser.Maui.Models.Commands;
 using HeldInvoiceReleaser.Maui.Models.Queries;
 using HeldInvoiceReleaser.Models;
-using Org.Apache.Http.Client;
 
 namespace HeldInvoiceReleaser.Maui.Services;
 
@@ -20,7 +20,7 @@ public class InvoiceApiService : IInvoiceApiService
 {
     public async Task<Result<string>> Login(LoginCommand loginCommand)
     {
-        var client = CreateClient();
+        var client = await CreateClient();
         try
         {
             var response = await client.PostAsync($"{loginCommand.ServerAddress}/auth", JsonContent.Create(new AuthRequest{Location = loginCommand.LocationId}));
@@ -34,18 +34,19 @@ public class InvoiceApiService : IInvoiceApiService
         }
     }
 
-    private HttpClient CreateClient()
+    private async Task<HttpClient> CreateClient()
     {
-        return new HttpClient(GetInsecureHandler())
+        var client = new HttpClient(GetInsecureHandler())
         {
             Timeout = TimeSpan.FromSeconds(7)
         };
-
+        client.DefaultRequestHeaders.Authorization =new AuthenticationHeaderValue("Bearer", await SecureStorage.GetAsync("token"));
+        return client;
     }
 
     public async Task<Result<IEnumerable<HeldInvoice>>> GetHeldInvoicesByLocation(GetHeldInvoicesByLocationQuery query)
     {
-        var client = CreateClient();
+        var client = await CreateClient();
         try
         {
             var response = await client.GetAsync($"{query.ServerAddress}/location/{query.Location}/invoices");
@@ -62,7 +63,7 @@ public class InvoiceApiService : IInvoiceApiService
     public async Task<Result> ReleaseHeldInvoice(ReleaseHeldInvoiceCommand command)
     {
 
-        var client = CreateClient();
+        var client = await CreateClient();
         try
         {
             var response = await client.PostAsync($"{command.ServerAddress}/location/{command.LocationId}/invoices/release/pickTicket", 
@@ -102,10 +103,15 @@ public class InvoiceApiService : IInvoiceApiService
 
     private HttpMessageHandler GetInsecureHandler()
     {
+#if ANDROID
         CustomAndroidMessageHandler handler = new();
         handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
         return handler;
+#else
+        return null;
+#endif
     }
+#if ANDROID
     internal sealed class CustomAndroidMessageHandler : Xamarin.Android.Net.AndroidMessageHandler
     {
         protected override Javax.Net.Ssl.IHostnameVerifier GetSSLHostnameVerifier(Javax.Net.Ssl.HttpsURLConnection connection)
@@ -119,4 +125,5 @@ public class InvoiceApiService : IInvoiceApiService
             }
         }
     }
+#endif
 }

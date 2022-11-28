@@ -53,8 +53,8 @@ public class TokenService : ITokenService
                 {
                     RequireExpirationTime = false,
                     ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
                     ValidIssuer = Issuer,
                     ValidAudience = Issuer,
                     IssuerSigningKey = mySecurityKey,

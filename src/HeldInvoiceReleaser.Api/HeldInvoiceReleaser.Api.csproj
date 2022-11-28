@@ -23,4 +23,10 @@
     <ProjectReference Include="..\HeldInvoiceReleaser\HeldInvoiceReleaser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
