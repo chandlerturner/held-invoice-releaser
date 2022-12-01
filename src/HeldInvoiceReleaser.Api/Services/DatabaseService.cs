@@ -17,7 +17,7 @@ namespace HeldInvoiceReleaser.Api.Services
     {
         public static readonly string ConnectionStringName = "SqlServer";
         private const string GetInvoices = "GetHeldInvoicesByLocation";
-        private const string ReleaseInvoice = "ReleaseHeldInvoiceByLocationAndPickTicket";
+        private const string ReleaseInvoice = "ReleaseHeldInvoiceByPickTicket";
         private readonly IConfiguration _configuration;
 
         public SqlServerDatabaseService(IConfiguration configuration)
