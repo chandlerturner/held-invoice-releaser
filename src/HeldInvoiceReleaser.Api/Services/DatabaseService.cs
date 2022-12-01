@@ -56,7 +56,7 @@ namespace HeldInvoiceReleaser.Api.Services
                 connection.Open();
 
                 await connection.ExecuteAsync(ReleaseInvoice,
-                    new { PickTicket = command.PickTicket, LocationId = command.LocationId },
+                    new { PickTicket = command.PickTicket },
                     commandType: CommandType.StoredProcedure);
 
                 output = Result.Success();
