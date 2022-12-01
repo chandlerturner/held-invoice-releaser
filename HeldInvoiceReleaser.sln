@@ -9,9 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeldInvoiceReleaser.Maui", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeldInvoiceReleaser", "src\HeldInvoiceReleaser\HeldInvoiceReleaser.csproj", "{AF1B7B9A-9F7C-4DA9-868C-91D285D4992F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeldInvoiceReleaser.Api", "src\HeldInvoiceReleaser.Api\HeldInvoiceReleaser.Api.csproj", "{44E59CA8-A8FF-41D0-8CA6-612DAE5268D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeldInvoiceReleaser.Api", "src\HeldInvoiceReleaser.Api\HeldInvoiceReleaser.Api.csproj", "{44E59CA8-A8FF-41D0-8CA6-612DAE5268D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeldInvoiceReleaser.Api.Shared", "src\HeldInvoiceReleaser.Api.Shared\HeldInvoiceReleaser.Api.Shared.csproj", "{36C14BF8-BC23-4060-BCBE-7719327A3906}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeldInvoiceReleaser.Api.Shared", "src\HeldInvoiceReleaser.Api.Shared\HeldInvoiceReleaser.Api.Shared.csproj", "{36C14BF8-BC23-4060-BCBE-7719327A3906}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{C7EF10C9-2319-4AA5-985A-F0DFB6DF9775}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\create-cert.ps1 = scripts\create-cert.ps1
+		scripts\maui-deploy-android.ps1 = scripts\maui-deploy-android.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
